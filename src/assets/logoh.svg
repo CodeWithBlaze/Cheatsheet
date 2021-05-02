@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="804.958" height="803.607" viewBox="0 0 804.958 803.607">
+  <defs>
+    <linearGradient id="linear-gradient" y1="0.5" x2="1" y2="0.5" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#6c63ff"/>
+      <stop offset="1" stop-color="#0790f9"/>
+    </linearGradient>
+    <filter id="Path_3" x="0" y="281.069" width="769.062" height="231.532" filterUnits="userSpaceOnUse">
+      <feOffset dy="8" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="undraw_Updates_re_o5af" transform="translate(15)">
+    <path id="Path_1" data-name="Path 1" d="M923.9,873.647H301.142V165H923.9Z" transform="translate(-234.3 -165)" fill="#fff"/>
+    <path id="Path_2" data-name="Path 2" d="M923.9,873.647H301.142V165H923.9Zm-613.638-8.463H914.78V173.464H310.266Z" transform="translate(-234.3 -165)" fill="#e6e6e6"/>
+    <rect id="Rectangle_1" data-name="Rectangle 1" width="621.967" height="90.653" transform="translate(67.892)" fill="url(#linear-gradient)"/>
+    <circle id="Ellipse_1" data-name="Ellipse 1" cx="52.954" cy="52.954" r="52.954" transform="translate(104.111 119.159)" fill="#e6e6e6"/>
+    <rect id="Rectangle_2" data-name="Rectangle 2" width="181.391" height="15.575" transform="translate(191.99 134.735)" fill="#e6e6e6"/>
+    <rect id="Rectangle_3" data-name="Rectangle 3" width="399.748" height="15.575" transform="translate(171.407 172.113)" fill="#e6e6e6"/>
+    <rect id="Rectangle_4" data-name="Rectangle 4" width="399.748" height="15.575" transform="translate(171.407 209.493)" fill="#e6e6e6"/>
+    <circle id="Ellipse_2" data-name="Ellipse 2" cx="52.954" cy="52.954" r="52.954" transform="translate(104.111 552.605)" fill="#e6e6e6"/>
+    <rect id="Rectangle_5" data-name="Rectangle 5" width="181.391" height="15.575" transform="translate(191.99 568.178)" fill="#e6e6e6"/>
+    <rect id="Rectangle_6" data-name="Rectangle 6" width="399.748" height="15.575" transform="translate(171.407 605.558)" fill="#e6e6e6"/>
+    <rect id="Rectangle_7" data-name="Rectangle 7" width="399.748" height="15.575" transform="translate(171.407 642.937)" fill="#e6e6e6"/>
+    <rect id="Rectangle_8" data-name="Rectangle 8" width="78.911" height="11.421" transform="translate(86.979 23.163)" fill="#fff"/>
+    <rect id="Rectangle_9" data-name="Rectangle 9" width="78.911" height="11.421" transform="translate(86.979 42.89)" fill="#fff"/>
+    <rect id="Rectangle_10" data-name="Rectangle 10" width="78.911" height="11.421" transform="translate(86.979 62.618)" fill="#fff"/>
+    <g transform="matrix(1, 0, 0, 1, -15, 0)" filter="url(#Path_3)">
+      <path id="Path_3-2" data-name="Path 3" d="M996.249,555.964H257.187V354.432H996.249Z" transform="translate(-242.19 -66.36)" fill="#fff"/>
+    </g>
+    <path id="Path_4" data-name="Path 4" d="M996.249,555.964H257.187V354.432H996.249ZM266.1,546.84H987.334V363.556H266.1Z" transform="translate(-257.187 -66.363)" fill="#ccc"/>
+    <circle id="Ellipse_3" data-name="Ellipse 3" cx="52.354" cy="52.354" r="52.354" transform="translate(41.518 336.192)" fill="url(#linear-gradient)"/>
+    <rect id="Rectangle_11" data-name="Rectangle 11" width="216.601" height="15.398" transform="translate(171.756 344.404)" fill="#3f3d56"/>
+    <path id="Path_20" data-name="Path 20" d="M0,0H477.342V15.4H0Z" transform="translate(172.252 373.358)" fill="#3f3d56"/>
+    <rect id="Rectangle_13" data-name="Rectangle 13" width="477.342" height="15.398" transform="translate(172.252 402.314)" fill="#3f3d56"/>
+    <path id="Path_16" data-name="Path 16" d="M863.934,608.978l55.713,128.449Z" transform="translate(-147.875 66.18)" fill="#2f2e41"/>
+    <path id="Path_19" data-name="Path 19" d="M910.145,403.226a28.019,28.019,0,0,0,3.626-8.328C912.64,397.692,911.436,400.479,910.145,403.226Z" transform="translate(-123.813 -45.292)" fill="#2f2e41"/>
+  </g>
+</svg>
