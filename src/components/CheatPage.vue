@@ -11,7 +11,10 @@
         :item="cheat" 
         @click="sendDataCatgeory(cheat.id)"></card>
         <h1 v-if="!isLoading && cheats.length==0">No Cheats Available</h1>
+        
     </div>
+    <button class="btn-loader"  @click="loadData" v-if="!isEmpty && cheats.length>=12">Load More Data</button>
+    <h3 v-if="isEmpty" style="font-family:Raleway;font-weight:600">NO MORE DATA TO LOAD</h3>
     <loader v-if="isLoading"></loader>
 </div>
    
@@ -37,14 +40,17 @@ export default {
         return{
             cheats:[],
             isLoading:true,
-            
+            last:0,
+            isEmpty:false
         }
     },
     methods:{
         loadData(){
             this.isLoading=true;
-            firestore.collection('Cheats').get().then(data=>{
-            data.docs.forEach(data=>{
+            firestore.collection('Cheats').orderBy('title')
+            .startAfter(this.last).limit(12).get().then(data=>{
+               this.last = data.docs[data.docs.length -1];
+                data.docs.forEach(data=>{
                 const cheat_obj=data.data();
                 this.cheats.push({
                         id:data.id,
@@ -54,8 +60,11 @@ export default {
                         author:cheat_obj.author,
 
                 })
+                
             })
             this.isLoading =false;
+             if(data.empty)
+                    this.isEmpty=true;
         })
         },
         sendDataCatgeory(id){
@@ -68,6 +77,7 @@ export default {
             const search_result=[];
             firestore.collection('Cheats').where('tagList','array-contains-any',query_arr).get()
             .then(data=>{
+                
                 data.docs.forEach(data=>{
                 const cheat_obj=data.data();
                 search_result.push({
@@ -84,7 +94,8 @@ export default {
         },
         onHome(){
             this.loadData();
-        }
+        },
+        
         }
     }
 
@@ -108,7 +119,15 @@ export default {
    
    
 }
-
+.btn-loader{
+    background-color: #141518;
+    color: #68AEE0;
+    font-family: Raleway;
+    font-weight: 500;
+    padding:10px;
+    margin-bottom:10px;
+    border:none;
+}
 @media only screen and (max-width: 600px) {
  .cheat-page{
      padding:20px;

@@ -10,9 +10,9 @@
             <form @submit.prevent>
                 <p>Welcome</p>
                 <h2 class="form-heading">Let's Make Your First Cheatsheet</h2>
-                <input placeholder="Name" v-model="name">
-                <input placeholder="Email" v-model="email">
-                <input placeholder="Password" v-model="password">
+                <input placeholder="Name" v-model="name" type="text">
+                <input placeholder="Email" v-model="email" type="email">
+                <input placeholder="Password" v-model="password" type="password">
                 <buttons label="Signup" btnwidth="30%" btnheight="40px" btnradius="25px" :OnClick="onSignup"></buttons>
                 <p class="form-signup" @click="goLogin">Already have a account ? Login in</p>
             </form>

@@ -4,8 +4,8 @@
             <form @submit.prevent>
                 <p>Welcome Back!</p>
                 <h2 class="form-heading">Let's Continue Your Revision</h2>
-                <input placeholder="email" v-model="email">
-                <input placeholder="password" v-model="password">
+                <input placeholder="email" v-model="email" type="email">
+                <input placeholder="password" v-model="password" type="password">
                 <buttons label="Login" btnwidth="30%" btnheight="40px" btnradius="25px" :OnClick="onLogin"></buttons>
                 <p class="form-signup" @click="goSignup">Dont have a account ? Create one now</p>
             </form>

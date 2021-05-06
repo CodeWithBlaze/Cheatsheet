@@ -68,15 +68,15 @@ export default {
                id:id,
                description:this.category[id].categoryDescription
            });
-           console.log(this.activeCategories)
+           
             
         },
         OnDeactivate(id){
            this.activeCategories = this.activeCategories.filter(active=>active.id!=id);
-           console.log(this.activeCategories);
+          
         },
         goBack(){
-            console.log("called");
+            
              this.$emit('changeView');
         },
         activeCategoryMenu(){

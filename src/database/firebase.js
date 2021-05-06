@@ -2,17 +2,18 @@ import firebase from 'firebase/app';
 import '@firebase/firestore';
 import '@firebase/auth';
 var firebaseConfig = {
-    apiKey: "AIzaSyDt6vfeisIfTSfvmVwCLCSJ9QOu7D22vQc",
-    authDomain: "cheat-sheet-12b28.firebaseapp.com",
-    projectId: "cheat-sheet-12b28",
-    storageBucket: "cheat-sheet-12b28.appspot.com",
-    messagingSenderId: "355016717653",
-    appId: "1:355016717653:web:d0fb095fa5ba0639e66bdc"
+    apiKey: process.env.VUE_APP_API_KEY,
+    authDomain:process.env.VUE_APP_AUTH_DOMAIN,
+    projectId: process.env.VUE_APP_PROJECT_ID,
+    storageBucket: process.env.VUE_APP_STORAGE_BUCKET,
+    messagingSenderId: process.env.VUE_APP_MESSAGING_SENDER_ID,
+    appId: process.env.VUE_APP_APP_ID
   };
   // Initialize Firebase
 const database = firebase.initializeApp(firebaseConfig);
 const auth = database.auth();
 const firestore = database.firestore();
+
 export {
   auth,
   firestore
