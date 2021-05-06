@@ -7,8 +7,6 @@
         <option value="description">Description</option>
         <option value="code">Code</option>
         </select><br>
-        <input v-if="selectedInputType==='code'" v-model="codeLangauge" 
-        placeholder="Enter Programming Language Name">
         <input v-if="selectedInputType==='text'" v-model="inputBoxQuery">
         <textarea v-else v-model="inputBoxQuery"></textarea><br>
         <buttons :label="isEditingActive?'Update':'Add'" 
@@ -70,7 +68,7 @@ export default {
        add(){
            this.inputBoxArray.push({
                id:this.inputBoxArray.length,
-               description:this.selectedInputType === 'code' ? getCodeColored(this.inputBoxQuery,this.codeLangauge.toLowerCase()) :  this.inputBoxQuery,
+               description:this.selectedInputType === 'code' ? getCodeColored(this.inputBoxQuery) :  this.inputBoxQuery,
                type:this.selectedInputType
            })
            
