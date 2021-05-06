@@ -2,7 +2,7 @@
     <div class="catgeory-container">
         <div class="form-container">
         <label class="select-input">Choose input type</label><br>
-        <select name="input_box" id="input_type" @change="onChange" v-model="selectedInputType">
+        <select name="input_box" id="input_type" v-model="selectedInputType">
         <option value="text" selected>Text</option>
         <option value="description">Description</option>
         <option value="code">Code</option>
@@ -56,9 +56,6 @@ export default {
         'back-button':BackButton,
     },
    methods:{
-       onChange(){
-           console.log(this.selectedInputType)
-       },
        getList(){
            const index = this.cheatFormData.activatedCategoryId;
            if(index===null || index === undefined)

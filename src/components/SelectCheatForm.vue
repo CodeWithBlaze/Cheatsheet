@@ -76,7 +76,7 @@ export default {
        choiceChanged(){
            const selected = this.selectedOptions;
             if(selected===""){
-                this.setValuesForData("","","",null,[]);
+                this.setValuesForData("","","","",[]);
                 this.cheatFormData.categoryList=[];
                 return;
            }
@@ -84,8 +84,8 @@ export default {
             this.setCategoryList(selected.id);
         },
         onSubmit(){
-            if(this.selectedOptions!=null){
-               firestore.collection('Cheats').doc(this.selectedOptions.id).update(
+            if(this.selectedOptions!=""){
+                firestore.collection('Cheats').doc(this.selectedOptions.id).update(
                    this.cheatFormData.cheatData
                ).then(()=>{
                    firestore.collection('Category').doc(this.categoryId).update({
@@ -102,6 +102,7 @@ export default {
                return;
            }
             const firestore_id = firestore.collection('Cheats').doc();
+            console.log(firestore_id);
             firestore_id.set(this.cheatFormData.cheatData);
             firestore.collection('Category').add({
                 cheat_id:firestore_id.id,
@@ -116,7 +117,6 @@ export default {
         },
         onDelete(){
             const selectedId = this.selectedOptions.id;
-            console.log(selectedId);
             firestore.collection('Category').where('cheat_id','==',selectedId).get()
             .then(data=>{
                 data.docs.forEach(data=>{

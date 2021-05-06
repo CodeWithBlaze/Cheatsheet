@@ -49,8 +49,7 @@ export default {
         },
         onDeleteCategory(){
             this.cheatFormData.categoryList=this.cheatFormData.categoryList.filter(item =>item.id != this.idx);
-              console.log(this.cheatFormData.categoryList);
-              console.log(this.idx)
+              
         },
        
     }
