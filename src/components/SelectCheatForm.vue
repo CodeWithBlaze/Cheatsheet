@@ -108,10 +108,10 @@ export default {
                 catgeory_list:this.cheatFormData.categoryList
             }).then(()=>{
                 this.isError=true;
-                this.error_type='success'
+                this.error_type='success';
             }).catch(()=>{
                 this.isError=true;
-                this.error_type='error'
+                this.error_type='error';
             })
         },
         onDelete(){
@@ -121,9 +121,13 @@ export default {
             .then(data=>{
                 data.docs.forEach(data=>{
                     firestore.collection('Category').doc(data.id).delete().then(()=>{
-                        console.log("category deleted");
+                        
                         firestore.collection('Cheats').doc(selectedId).delete().then(()=>{
-                            console.log("deleted cheats");
+                            this.isError=true;
+                            this.error_type ='success'
+                        }).catch(()=>{
+                            this.isError=true;
+                            this.error_type='error';
                         })
                     })
                 })

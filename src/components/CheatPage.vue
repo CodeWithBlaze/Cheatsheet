@@ -14,7 +14,7 @@
         
     </div>
     <button class="btn-loader"  @click="loadData" v-if="!isEmpty && cheats.length>=12">Load More Data</button>
-    <h3 v-if="isEmpty" style="font-family:Raleway;font-weight:600">NO MORE DATA TO LOAD</h3>
+    <h3 v-if="isEmpty && cheats.length>0" style="font-family:Raleway;font-weight:600">NO MORE DATA TO LOAD</h3>
     <loader v-if="isLoading"></loader>
 </div>
    
@@ -127,6 +127,9 @@ export default {
     padding:10px;
     margin-bottom:10px;
     border:none;
+}
+h1{
+    font-family: Raleway;
 }
 @media only screen and (max-width: 600px) {
  .cheat-page{
