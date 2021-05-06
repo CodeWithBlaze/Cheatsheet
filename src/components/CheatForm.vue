@@ -1,5 +1,5 @@
 <template>
-    
+   
    <category @changeView="ChangeActiveView" v-if="change"></category>
    <div :class="[change?'do-not-show':'cheat-form-container']">
         
@@ -42,6 +42,15 @@
                 @getDataLength="setDataLength"
                 >
                 </select-cheat-form>
+                <div class="button-container-logout">
+                    <buttons
+                    btnwidth="100%" 
+                    btnheight="40px" 
+                    label="Logout" 
+                    :OnClick="onLogout">
+                    </buttons>
+                </div>
+                
             </form-container>
         </div>
         
@@ -56,22 +65,26 @@ import SelectCheatForm from './SelectCheatForm.vue';
 import Buttons from '../UI/Buttons.vue';
 import {firestore} from '../database/firebase.js';
 import Category from './Category.vue';
+
 export default {
-    
+    emits:['onLogout'],
+    inject:['author'],
     mounted(){
-        firestore.collection('Cheats').get().then(data=>{
+        firestore.collection('Cheats').where('creator_uid','==',this.author.id).get().then(data=>{
             data.docs.forEach(data=>{
             const cheat_obj=data.data();
             this.cheats.push({
                         id:data.id,
-                        categoryid:cheat_obj.categoryid,
                         image:cheat_obj.image,
                         label:cheat_obj.title,
                         description:cheat_obj.description,
-                        author:cheat_obj.author
+                        author:cheat_obj.author,
+                        tagList:cheat_obj.tagList
                 })
             })
         })
+        
+        
     },
     
     components:{
@@ -80,7 +93,8 @@ export default {
         'cheat-layout':CheatLayout,
         'select-cheat-form':SelectCheatForm,
         'buttons':Buttons,
-        'category':Category
+        'category':Category,
+        
     },
     provide(){
         return {
@@ -91,6 +105,7 @@ export default {
     },
     data(){
         return{
+           
             change:false,
             dataLength:0,
             cheatFormData:{
@@ -105,7 +120,9 @@ export default {
                     title:"",
                     description:"",
                     image:"",
-                    
+                    author:this.author.name,
+                    creator_uid:this.author.id,
+                    tagList:[],
                 }
             },
             
@@ -121,6 +138,7 @@ export default {
                 categoryName:"",
                 categoryDescription:[]
             })
+            
         },
         checkDisableCondition(btnName){
             const choice = this.cheatFormData.selectedCheat!==null;
@@ -147,8 +165,13 @@ export default {
         },
         setDataLength(length){
             this.dataLength = length;
-        }
+        },
+        onLogout(){
+            this.$emit('onLogout');
+        },
+        
     }
+    
 }
 </script>
 <style scoped>
@@ -162,16 +185,24 @@ export default {
     justify-content: center;
     
 }
-.button-container{
+.button-container-logout{
     padding:15px;
-    padding-top:15px;
+    padding-top: 0px;
     cursor: pointer;
 
 }
+.button-container{
+    padding:15px;
+    cursor: pointer;
 
+}
 .do-not-show{
     display: none;
     background-color: cyan;
 }
-
+@media only screen and (max-width: 600px) {
+    .cheat-form-container{
+        display: block;
+    }
+}
 </style>

@@ -1,7 +1,13 @@
 <template>
     <div class="container">
+        
         <div class="cheat-menu-container">
-            <div class="cheat-menu">
+            <div class="btn-container">
+                <button class="btn-menu" @click="activeCategoryMenu">
+                    <i class="fa fa-bars" aria-hidden="true"></i>
+                </button>
+            </div>
+            <div :class="isShowing?'cheat-menu':'do-not-show'">
                 <activation-button v-for="item in category" 
                 :key="item.id"
                 :label="item.categoryName" 
@@ -30,13 +36,15 @@ import ActivationButton from '../UI/ActivationButton.vue';
 import {firestore} from '../database/firebase.js';
 import DynamicBox from '../UI/DynamicBox.vue';
 import BackButton from '../UI/BackButton.vue';
+
 export default {
     props:['activeCategory'],
     emits:['changeView'],
     components:{
         'activation-button':ActivationButton,
         'dynamic-box':DynamicBox,
-        'back-button':BackButton
+        'back-button':BackButton,
+      
     },
     mounted(){
         firestore.collection('Category').where('cheat_id','==',this.activeCategory).get()
@@ -50,7 +58,8 @@ export default {
     data(){
         return{
             activeCategories:[],
-            category:[]
+            category:[],
+            isShowing:true,
         }
     },
     methods:{
@@ -69,6 +78,9 @@ export default {
         goBack(){
             console.log("called");
              this.$emit('changeView');
+        },
+        activeCategoryMenu(){
+            this.isShowing =!this.isShowing;
         }
     }
 }
@@ -80,7 +92,11 @@ export default {
     background-color:#EEEEEE;
     padding:60px;
 }
+.btn-container{
+    display: none;
+}
 .cheat-menu-container{
+    
     width:100%;
     height:fit-content;
     display: flex;
@@ -102,6 +118,7 @@ export default {
     box-shadow:rgba(189, 195, 199,1) 0px 0px 15px;
 }
 .cheat-preview-area{
+    
     width:100%;
     height:fit-content;
     padding:5px;
@@ -109,5 +126,36 @@ export default {
     margin-bottom: 5px;
     font-family: Raleway;
 }
-
+.do-not-show{
+    display: none;
+}
+@media only screen and (max-width: 600px) {
+    .container{
+        padding:15px;
+        padding-top: 40px;
+    }
+    .cheat-menu-container{
+        display: block;
+        
+    }
+    .cheat-menu{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .cheat-preview{
+        width: 100%;
+    }
+    .btn-container{
+        display: block;
+    }
+    .btn-menu{
+        width:40px;
+        height:40px;
+        border-radius: 50%;
+        border:none;
+        background-color: cornflowerblue;
+        color:white;
+        margin-bottom: 15px;
+    }
+}
 </style>

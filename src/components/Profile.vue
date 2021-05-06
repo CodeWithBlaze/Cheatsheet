@@ -1,21 +1,32 @@
 <template>
-    <notification v-if="isError" type="error" text="Wrong Email or Password" @close="close">
+    <notification v-if="isError" :type="type" 
+    :text="error_msg" @close="close">
     </notification>
     <login v-if="!isLoggedIn" @LoginAttempt="onLogin" @changeActiveProfileComponent="changeComponent"></login>
-    <cheat-form v-else></cheat-form>
+    <cheat-form v-else @onLogout="onLogout"></cheat-form>
     
 </template>
 <script>
 import Login from './Login.vue';
 import CheatForm from './CheatForm.vue';
-import {auth} from '../database/firebase.js';
+import {auth,firestore} from '../database/firebase.js';
 import NotificationLayout from '../notifications/NotificationLayout.vue';
 export default {
-    
+    provide(){
+        return {
+            'author':this.profile
+        }
+    },
     data(){
         return{
-            isLoggedIn:true,
+            isLoggedIn:false,
+            type:"",
+            error_msg:null,
             isError:false,
+            profile:{
+                name:"",
+                id:null,
+            }
         }
         
     },
@@ -26,11 +37,31 @@ export default {
     },
     methods:{
         onLogin(username,password){
-            auth.signInWithEmailAndPassword(username,password).then(()=>{
-                this.isLoggedIn = true;
+            if(username!="" && password !=""){
+                 auth.signInWithEmailAndPassword(username,password).then(cred=>{
+                firestore.collection('Users').doc(cred.user.uid).get().then(data=>
+                {
+                    this.profile.name = data.data().name;
+                    this.profile.id = data.id;
+                    this.isLoggedIn = true;
+                })
+                
+                
             }).catch(()=>{
                 this.isError=true;
+                this.type='error';
+                this.error_msg = 'Wrong Email or Password';
             })
+            }
+            else{
+                this.isError=true;
+                this.type='warning';
+                this.error_msg='All Fields are required';
+            }
+           
+        },
+        onLogout(){
+            this.isLoggedIn = false;
         },
         changeComponent(comname){
             this.$emit('changeActiveComponent',comname);
@@ -43,6 +74,3 @@ export default {
         
 }
 </script>
-<style scoped>
-
-</style>

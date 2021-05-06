@@ -1,28 +1,29 @@
 <template>
-    <notification :type="type" 
-    :text="type=='success'?'Sign up Successful':'Sign up failed'" 
+    
+        <notification :type="type" 
+    :text="error_msg" 
     v-if="isError"
     @close="close"
-    >
-
-    </notification>
+    ></notification>
     <authentication-form-container class="form-container">
         <img src="../assets/openlayers.svg" class="nav-logo">
             <form @submit.prevent>
                 <p>Welcome</p>
                 <h2 class="form-heading">Let's Make Your First Cheatsheet</h2>
                 <input placeholder="Name" v-model="name">
-                <input placeholder="email" v-model="email">
-                <input placeholder="password" v-model="password">
+                <input placeholder="Email" v-model="email">
+                <input placeholder="Password" v-model="password">
                 <buttons label="Signup" btnwidth="30%" btnheight="40px" btnradius="25px" :OnClick="onSignup"></buttons>
                 <p class="form-signup" @click="goLogin">Already have a account ? Login in</p>
             </form>
     </authentication-form-container>
+    
+    
 </template>
 <script>
 import Buttons from '../UI/Buttons.vue';
 import AuthenticationForm from '../UI/AuthenticationForm.vue';
-import {auth} from '../database/firebase.js';
+import {auth, firestore} from '../database/firebase.js';
 import NotificationLayout from '../notifications/NotificationLayout.vue';
 export default{
     components:{
@@ -37,25 +38,42 @@ export default{
             email:"",
             password:"",
             type:'success',
-            isError:false
+            isError:false,
+            error_msg:""
         }
     },
     methods:{
         onSignup(){
-            auth.createUserWithEmailAndPassword(this.email,this.password).then(()=>{
-                this.isError = true;
+            if(this.name!="" && this.email !="" && this.password != ""){
+                 auth.createUserWithEmailAndPassword(this.email,this.password).then(cred=>{
+                
+                firestore.collection('Users').doc(cred.user.uid).set({
+                    name:this.name,
+                }).then(()=>{
+                    this.isError = true;
+                    this.error_msg = 'Signup Successful';
+                })
+                
                 
             }).catch(()=>{
                 this.type = 'error';
                 this.isError = true;
+                this.error_msg = 'Signup failed';
             })
+            }else{
+                this.isError=true;
+                this.type='warning';
+                this.error_msg = 'All Fields Are Required';
+            }
+           
         },
         goLogin(){
             this.$emit('changeActiveComponent','Create');
         },
         close(){
             this.isError = false;
-            this.goLogin();
+            if(this.type=='success')
+                this.goLogin();
         }
     },
     emits:['changeActiveComponent']
@@ -74,6 +92,8 @@ input{
     padding:15px;
     border-radius: 5px;
     font-weight: 500;
+    font-family: Raleway;
+    font-weight:600;
     
 }
 p{

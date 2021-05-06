@@ -49,8 +49,10 @@ export default {
 </script>
 <style scoped>
 .category-editor-container{
-   padding:15px;
-   position: relative;
+   padding-top: 20px;
+   padding-left: 20px;
+   padding-right: 20px;
+   
 }
 .heading-box{
     display: flex;
@@ -58,9 +60,8 @@ export default {
     align-items: center;
     width:100%;
     height: 60px;
-    margin-bottom:5px;
     cursor: pointer;
-    font-family:Righteous;
+    font-family:Raleway;
     color:white;
     border: 2px solid black;
 }

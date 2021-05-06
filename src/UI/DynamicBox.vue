@@ -31,7 +31,7 @@ export default {
     color: black;
     font-family: Raleway;
     font-weight: 500;
-    
+    margin-top: 10px;
 }
 .code {
     background-color:  #282C35;
@@ -46,5 +46,11 @@ label{
 }
 pre {
    white-space:pre;
+}
+@media only screen and (max-width: 600px) {
+    .description{
+        font-size: 15px;
+        line-height: 21px;
+    }
 }
 </style>

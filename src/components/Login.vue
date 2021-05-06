@@ -24,6 +24,7 @@ export default {
         return{
             email:"",
             password:"",
+            
         }
     },
     methods:{
@@ -48,6 +49,8 @@ input{
     border:#0790F9 2px solid;
     padding:15px;
     border-radius: 5px;
+    font-weight: 500;
+    font-family: Raleway;
     font-weight: 500;
     
 }

@@ -20,10 +20,11 @@ export default {
     cursor: pointer;
     font-family: Raleway;
     width:350px;
-    height:360px;
+    height:fit-content;
     box-shadow:rgba(189, 195, 199,1) 0px 0px 15px;
-    margin-left: 60px;
-    margin-bottom: 60px;
+    margin-right: 60px;
+    margin-bottom: 30px;
+    
 }
 p{
     margin-top:15px;
@@ -31,6 +32,8 @@ p{
 .card-image{
     width:350px;
     height:200px;
+    object-fit:cover;
+    overflow:hidden;
     
 }
 .card-text{
@@ -43,7 +46,7 @@ p{
 }
 .card-description{
     overflow: hidden;
-    height:65px;
+    height:auto;
     text-overflow: ellipsis;
     padding-left:5px;
     padding-right: 5px;
@@ -52,9 +55,20 @@ p{
     font-weight: 500;
 }
 .author{
-
     font-weight: 400;
     font-size: 13px;
     color:#A9A9A9;
+}
+@media only screen and (max-width: 600px) {
+ .card{
+     margin:0px;
+     margin-bottom:35px;
+     padding:0px;
+     overflow:hidden;
+ }
+ .card-image{
+     width:100%;
+     height:auto;
+ }
 }
 </style>

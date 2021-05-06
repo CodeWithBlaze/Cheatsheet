@@ -1,6 +1,6 @@
 <template>
     <div class="editor-option-container">
-        <div class="icon icon1">
+        <div class="icon icon1" @click="onDeleteCategory">
             <i :class="image_one" aria-hidden="true"></i>
         </div>
         <div class="icon icon2" v-if="!isLocked" @click="activateCategoryEditor">
@@ -36,7 +36,6 @@ export default {
                 const data=this.cheatFormData.categoryList[this.idx];
                 data.categoryName=this.name;
                 this.color='green';
-                console.log(this.cheatFormData.categoryList)
             }
             else
                 this.color='grey';
@@ -47,9 +46,13 @@ export default {
         activateCategoryEditor(){
           this.cheatFormData.activatedCategoryId = this.idx;
           this.revertView();
-           
-            
-        }
+        },
+        onDeleteCategory(){
+            this.cheatFormData.categoryList=this.cheatFormData.categoryList.filter(item =>item.id != this.idx);
+              console.log(this.cheatFormData.categoryList);
+              console.log(this.idx)
+        },
+       
     }
 }
 </script>

@@ -77,6 +77,8 @@ html{
   height:100%;
 }
 #component-container{
+  width:100%;
   flex:1;
 }
+
 </style>

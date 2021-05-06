@@ -65,10 +65,12 @@ export default {
     top:0px;
     left:0px;
     width:100%;
-    height:100vh;
+    height:100%;
     background-color: rgba(0,0,0,0.5);
+    z-index: 5;
     
 }
+
 .notification{
     width:400px;
     height:200px;
@@ -110,5 +112,16 @@ label{
     justify-content:center;
     align-items: center;
     cursor: pointer;
+}
+@media only screen and (max-width: 600px) {
+    .notification-container{
+        width:100%;
+        min-height:100%;
+        height:940px;
+    }
+    .notification{
+        width:350px;
+        
+    }
 }
 </style>

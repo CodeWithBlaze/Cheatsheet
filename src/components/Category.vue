@@ -1,7 +1,7 @@
 <template>
     <div class="catgeory-container">
         <div class="form-container">
-        <label for="cars">Choose input type</label><br>
+        <label class="select-input">Choose input type</label><br>
         <select name="input_box" id="input_type" @change="onChange" v-model="selectedInputType">
         <option value="text" selected>Text</option>
         <option value="description">Description</option>
@@ -86,7 +86,7 @@ export default {
        },
        remove(id){
            this.inputBoxArray.splice(id,1);
-           console.log(this.inputBoxArray);
+           this.updateIds(id);
        },
        edit(id){
            const item=this.inputBoxArray[id];
@@ -97,6 +97,12 @@ export default {
         },
         goBack(){
             this.$emit('changeView');
+        },
+        updateIds(id){
+            console.log("called")
+            for(let i=id;i<this.inputBoxArray.length;i++)
+                this.inputBoxArray[i].id = i;
+            
         }
         
    }
@@ -108,32 +114,39 @@ textarea {
     min-height:300px;
     height: fit-content;
     max-height: 700px;
-    padding-left:0px;
+    padding-left:15px;
+    padding-top: 15px;
     font-family: Raleway;
 }
 .catgeory-container{
     display: flex;
     justify-content: space-around;
+    height: 100%;
+    background-color: #EEEEEE;
     
 }
 .form-container{
     width:30%;
     margin:30px;
     margin-left:60px;
+    background-color: white;
+    padding:25px;
+    border-radius: 5px;
     
-    padding:15px;
 }
 .output-container{
     width:70%;
+    background-color: white;
     height:fit-content;
     margin:30px;
     margin-left: 15px;
     padding:15px;
+    border-radius: 5px;
 }
-label{
+.select-input{
     font-family: Raleway;
     font-weight: 600;
-    margin-bottom: 5px;
+    
 }
 select {
     width:100%;
@@ -151,5 +164,24 @@ input{
     font-weight: 600;
     margin-bottom: 15px;
 }
-
+@media only screen and (max-width: 600px) {
+    .catgeory-container{
+        display: block;
+        padding:15px;
+    }
+    .form-container{
+        width:100%;
+        margin:0px;
+        padding:25px;
+    }
+    .output-container{
+        width: 100%;
+        margin:0px;
+        padding:25px;
+        margin-top:25px;
+    }
+    select {
+        margin-top: 15px;
+    }
+}
 </style>

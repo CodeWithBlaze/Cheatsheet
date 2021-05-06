@@ -70,6 +70,7 @@ input{
     padding-left: 15px;
     font-family:Raleway;
     font-weight: 500;
+    border-radius: 5px;
 }
 textarea{
     width: 100%;
@@ -78,8 +79,10 @@ textarea{
     font-weight: 500;
     padding-left: 15px;
     padding-top: 15px;
+    border-radius: 5px;
 }
 .required{
-    border:2px solid red;
+    border:3px solid red;
+    
 }
 </style>

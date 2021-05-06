@@ -17,4 +17,10 @@
     color:white;
     box-shadow:5px 5px 10px grey;
 }
+@media only screen and (max-width: 600px) {
+    .go-back-button{
+        left:85%;
+        top:15px;
+    }
+}
 </style>

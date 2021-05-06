@@ -24,9 +24,7 @@ export default {
      font-family: Righteous;
      cursor: pointer;
  }
- .btn:hover{
-     transform:scale(1.2);
- }
+ 
  button:disabled{
      /* background-image: linear-gradient(to right,#28313b,#485461); */
      background-image: none;
