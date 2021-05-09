@@ -1,6 +1,6 @@
 <template>
     <notification  v-if="isError"  :type="error_type" 
-    :text="error_type=='success'?'Submited':'Submission Failed'" @close="close"></notification>
+    :text="error_msg" @close="close"></notification>
     <div class="select-form">
        <label>Choose a {{label}}</label>
        <select name="cheats" id="cheat-selector" @change="choiceChanged()" v-model="selectedOptions">
@@ -13,7 +13,7 @@
        btnwidth="100%" 
        btnheight="40px" 
        :disable="disableSubmit"
-       :OnClick="onSubmit"
+       :OnClick="checkCategory"
        ></buttons>
        <label>Tags</label>
        <div class="tag-preview">{{tags}}</div>
@@ -45,6 +45,7 @@ export default {
             tags:this.cheatFormData.cheatData.tagList,
             tag_text:"",
             categoryId:null,
+            error_msg:""
         }
     },
     methods:{
@@ -83,8 +84,21 @@ export default {
             this.setValuesForData(selected.label,selected.image,selected.description,selected.label,selected.tagList);
             this.setCategoryList(selected.id);
         },
+        checkCategory(){
+            const verified = this.cheatFormData.categoryList.every(function(item){
+                return item.categoryName !="";
+            }) 
+            if(verified)
+                this.onSubmit();
+            else{
+                this.isError = true;
+                this.error_type = 'warning';
+                this.error_msg = 'Category Name is empty or Category is not locked';
+            }  
+        },
         onSubmit(){
-            if(this.selectedOptions!=""){
+         
+             if(this.selectedOptions!=""){
                 firestore.collection('Cheats').doc(this.selectedOptions.id).update(
                    this.cheatFormData.cheatData
                ).then(()=>{
@@ -92,17 +106,18 @@ export default {
                    catgeory_list:this.cheatFormData.categoryList
                 }).then(()=>{
                     this.isError = true;
-                    this.error_type = 'success'
+                    this.error_type = 'success';
+                    this.error_msg = 'Submitted Successfully';
                 }).catch(()=>{
                     this.isError = true;
-                    this.error_type = 'error'
+                    this.error_type = 'error';
+                    this.error_msg = 'Submission Failed';
                 })
                })
                
                return;
            }
             const firestore_id = firestore.collection('Cheats').doc();
-            console.log(firestore_id);
             firestore_id.set(this.cheatFormData.cheatData);
             firestore.collection('Category').add({
                 cheat_id:firestore_id.id,
@@ -151,8 +166,7 @@ export default {
         deleteTag(){
             this.tags = this.tags.filter(tag=>tag!=this.tag_text.toLowerCase())
             this.cheatFormData.cheatData.tagList=this.tags;
-            console.log(this.tags);
-            console.log(this.cheatFormData.cheatData.tagList)
+            
         },
         alreadyPresent(text){
             for(const item in this.tags)

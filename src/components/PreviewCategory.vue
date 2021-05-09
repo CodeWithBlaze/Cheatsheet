@@ -51,7 +51,7 @@ export default {
         .then(data=>{
             data.docs.forEach(data=>{
                 this.category = data.data().catgeory_list;
-                console.log(this.category)
+                
             })
         })
     },

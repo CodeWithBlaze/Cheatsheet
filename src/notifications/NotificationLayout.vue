@@ -10,7 +10,7 @@
             <i v-if="checkType()" :class="['fa','icon','fa-2x',icon_class]" aria-hidden="true"></i>
             <label>{{text}}</label>
             
-        </div>
+            </div>
         </div>
        
         
@@ -77,6 +77,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding:30px;
     
 }
 .icon{

@@ -13,7 +13,12 @@
                 <input placeholder="Name" v-model="name" type="text">
                 <input placeholder="Email" v-model="email" type="email">
                 <input placeholder="Password" v-model="password" type="password">
-                <buttons label="Signup" btnwidth="30%" btnheight="40px" btnradius="25px" :OnClick="onSignup"></buttons>
+                <buttons label="Signup" 
+                btnwidth="30%" 
+                btnheight="40px" 
+                btnradius="25px" 
+                :OnClick="onSignup" 
+                :disable="makeDisable"></buttons>
                 <p class="form-signup" @click="goLogin">Already have a account ? Login in</p>
             </form>
     </authentication-form-container>
@@ -39,12 +44,14 @@ export default{
             password:"",
             type:'success',
             isError:false,
-            error_msg:""
+            error_msg:"",
+            makeDisable:false
         }
     },
     methods:{
         onSignup(){
             if(this.name!="" && this.email !="" && this.password != ""){
+                    this.makeDisable = true;
                  auth.createUserWithEmailAndPassword(this.email,this.password).then(cred=>{
                 
                 firestore.collection('Users').doc(cred.user.uid).set({
@@ -55,10 +62,11 @@ export default{
                 })
                 
                 
-            }).catch(()=>{
+            }).catch((error)=>{
+                
                 this.type = 'error';
                 this.isError = true;
-                this.error_msg = 'Signup failed';
+                this.error_msg = error.message;
             })
             }else{
                 this.isError=true;
@@ -71,6 +79,7 @@ export default{
             this.$emit('changeActiveComponent','Create');
         },
         close(){
+            this.makeDisable = false;
             this.isError = false;
             if(this.type=='success')
                 this.goLogin();

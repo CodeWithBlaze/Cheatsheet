@@ -94,7 +94,7 @@ export default {
             this.$emit('changeView');
         },
         updateIds(id){
-            console.log("called")
+            
             for(let i=id;i<this.inputBoxArray.length;i++)
                 this.inputBoxArray[i].id = i;
             
