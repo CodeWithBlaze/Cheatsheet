@@ -5,6 +5,7 @@
         <select name="input_box" id="input_type" v-model="selectedInputType">
         <option value="text" selected>Text</option>
         <option value="description">Description</option>
+        <option value="info">Info</option>
         <option value="code">Code</option>
         </select><br>
         <input v-if="selectedInputType==='text'" v-model="inputBoxQuery">

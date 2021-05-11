@@ -4,6 +4,7 @@
             <pre v-else-if="type==='code'" >
                 <p v-html="description"></p>
             </pre>
+            <div v-else-if="type==='info'">{{description}}</div>
             <div v-else>{{description}}</div>
     </div>
 </template>
@@ -46,6 +47,16 @@ label{
 }
 pre {
    white-space:pre;
+}
+.info{
+    background-color: #EEEEF0;
+    color:black;
+    font-family: Raleway;
+    font-weight: 500;
+    padding-left: 15px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 15px;
 }
 @media only screen and (max-width: 600px) {
     .description{
