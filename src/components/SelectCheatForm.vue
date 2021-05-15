@@ -125,9 +125,11 @@ export default {
             }).then(()=>{
                 this.isError=true;
                 this.error_type='success';
+                this.error_msg ='submitted successfully';
             }).catch(()=>{
                 this.isError=true;
                 this.error_type='error';
+                this.error_msg =  'submission failed';
             })
         },
         onDelete(){
